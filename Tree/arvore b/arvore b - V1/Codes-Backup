@@ -1,0 +1,20 @@
+Add key e cria um child
+
+for i in range(len(self.keys)):
+    if key < self.keys[i]:
+        if self.child[i]:
+            self.child[i].insert_key(key, order)
+        if i == (len(self.keys) - 1):
+            if self.child[i+1]:
+                self.child[i+1].insert_key(key, order)
+
+Split node
+aux = node.child[i] #get the child in the i position
+        new_node = Node(aux.leaf)
+        node.child.insert(i + 1, new_node) #empty child
+        node.keys.insert(i, new_node.keys[order-1]) #add the key in the middle of the node
+        new_node.keys = aux.keys[order: (2*order)+1] #new node if half keys
+        aux.keys = aux.keys[0: order] #aux node if other half keys
+        if not aux.leaf:
+            new_node.child = aux.child[order:2*order]
+            aux.child = aux.child[order:2*order]
